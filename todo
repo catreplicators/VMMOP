@@ -1,0 +1,32 @@
+
+--Functionality--
+[V] Actually do the operation.
+      [ ] Ask for confirmation for overwrite.
+[V] Return new path from text boxes.
+      [ ] Verify path.
+      [ ] Popup on invalid path.
+[V] Open operation file.
+      [V] Verify integrity.
+[ ] Save operation file. 
+      [ ] Ask for confirmation for overwrite.
+[ ] Settings file saved in constant location.
+      [ ] Restore last operation.
+      [ ] Default opening folder: same as last time or particular folder? If latter fails, ascend path until valid?
+[ ] Some kind of wildcards.
+[ ] SteamCMD functionality, i.e. downloading specific items to the output folder.
+
+--QOL--
+[ ] Settings menu?
+[ ] Customizable color palette.
+[ ] Hover tooltips.
+[I] User guide (external PDF).
+[ ] Modify operation directly in menu.
+[ ] Hot-reload operation from file.
+
+--Bugs--
+[ ] Icon does not show up in bottom bar.
+[ ] Bottommost entry in the list is clipped / not given enough space.
+
+--UI--
+[ ] United color pallete: split complementary, or analagous.
+[ ] Clip right bound of the filename section of each line 5px/10px before end

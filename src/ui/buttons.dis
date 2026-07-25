@@ -1,0 +1,39 @@
+import { Button, VerticalBox } from "std-widgets.slint";
+
+export component Circle {
+    in property <length> radius;
+    in property <color> color;
+    VerticalBox {
+        width:  radius*2;
+        height: radius*2;
+        Rectangle {
+            background: color;
+            border-radius: radius * 1;
+            @children
+        }
+    }
+}
+export component CircularButton {
+    in property <length> inner_radius;
+    in property <length> outer_radius;
+    in property <color> buttoncolor;
+    in property <color> ringcolor;
+    callback clicked();
+
+    Circle {
+        radius: outer_radius;
+        color: ringcolor;
+        Circle {
+            radius: inner_radius;
+            color: buttoncolor;
+            TouchArea {
+                clicked => {
+                    root.clicked();
+                }
+            }
+            @children
+        }
+    }
+
+}
+

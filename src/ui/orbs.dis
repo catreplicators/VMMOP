@@ -1,0 +1,19 @@
+import {CircularButton} from "buttons.slint";
+
+export component StaticOrbSystem {
+      in property <length> outer_radius;
+      in property <length> inner_radius;
+      in property <length> orb_radius;
+      in property <color> outer_color;
+      in property <color> inner_color;
+      in property <color> orb_color;
+      in property <int> name;
+      CircularButton {
+            inner_radius: inner_radius;
+            outer_radius: outer_radius;
+            buttoncolor: inner_color;
+            ringcolor: outer_color;
+
+      }
+
+}

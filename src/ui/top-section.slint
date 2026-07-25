@@ -1,0 +1,121 @@
+import { Button, VerticalBox, HorizontalBox, ScrollView, ListView, LineEdit } from "std-widgets.slint";
+
+export component TopSection {
+    in-out property <{actions: [{change: int, file: string}], out: string, src: string, name: string}> operation;
+
+    callback request-save-operation-file();
+    callback request-operate();
+    callback request-open-operation-file();
+    callback request-get-dir-source();
+    callback request-get-dir-out();
+
+    callback request-change-details(operation_details: {out: string, src: string, name: string});
+
+    Rectangle {
+      min-height: 100px;
+      min-width: 400px;
+      background: @linear-gradient(165deg, #777777 10%, #2A2A2AFF 50%, #434343FF 90%);
+      border-radius: 10px;
+      VerticalLayout {
+          padding: 5px;
+          spacing: 5px;
+          HorizontalLayout {
+              spacing: /* 1 */0px;
+              savebutton := FocusScope {} /* Button {
+                  text: "Save current operation to file";
+                  clicked => {request-save-operation-file()};
+                  enabled: false && !(nameline.has-focus||sourcefolderline.has-focus||outfolderline.has-focus||loadbutton.has-focus||srcfbutton.has-focus||outfbutton.has-focus||execbutton.has-focus);
+              } */
+              execbutton := Button {
+                  width: 100%;
+                  text: "Execute current operation";
+                  clicked => {request-operate()};
+                  enabled: !(nameline.has-focus||sourcefolderline.has-focus||outfolderline.has-focus||loadbutton.has-focus||srcfbutton.has-focus||outfbutton.has-focus||savebutton.has-focus);
+              }
+          }
+          HorizontalLayout {
+              spacing: 10px;
+              loadbutton := Button {
+                  width: 100px;
+                  text: "Load from file";
+                  clicked => {request-open-operation-file()};
+                  enabled: !(nameline.has-focus||sourcefolderline.has-focus||outfolderline.has-focus||savebutton.has-focus||execbutton.has-focus);
+              }
+              FocusScope {
+                  nameline := LineEdit {
+                        preferred-width: 100%;
+                        horizontal-alignment: left;
+                        placeholder-text: "Unnamed Operation";
+                        text: operation.name;
+                        read-only: loadbutton.has-focus;
+                        changed has-focus => {
+                              if !self.has-focus {
+                                    request-change-details({out: outfolderline.text, src: sourcefolderline.text, name: nameline.text})
+                              }
+                        }
+                  }
+                  KeyBinding {
+                      keys: @keys(Return);
+                      activated => {nameline.clear-focus(); request-change-details({out: outfolderline.text, src: sourcefolderline.text, name: nameline.text});}
+                  }
+              }
+          }
+          HorizontalLayout {
+              spacing: 10px;
+              srcfbutton := Button {
+                  width: 100px;
+                  text: "Select source";
+                  enabled: !(sourcefolderline.has-focus||savebutton.has-focus||execbutton.has-focus);
+                  clicked => {request-get-dir-source()}
+              }
+              FocusScope {
+                  sourcefolderline := LineEdit {
+                        //x: 5px;
+                        preferred-width: 100%;
+                        horizontal-alignment: left;
+                        placeholder-text: "Input source folder.";
+                        text: operation.src;
+                        read-only: srcfbutton.has-focus || loadbutton.has-focus;
+                        changed has-focus => {
+                              if !self.has-focus {
+                                    request-change-details({out: outfolderline.text, src: sourcefolderline.text, name: nameline.text})
+                              }
+                        }
+                  }
+                  KeyBinding {
+                      keys: @keys(Return);
+                      activated => {sourcefolderline.clear-focus(); request-change-details({out: outfolderline.text, src: sourcefolderline.text, name: nameline.text});}
+                  }
+              }
+          }
+          HorizontalLayout {
+              spacing: 10px;
+              outfbutton := Button {
+                  width: 100px;
+                  text: "Select output";
+                  enabled: !(outfolderline.has-focus||savebutton.has-focus||execbutton.has-focus);
+                  clicked => {request-get-dir-out()}
+              }
+              FocusScope {
+                  outfolderline := LineEdit {
+                        //x: 5px;
+                        preferred-width: 100%;
+                        horizontal-alignment: left;
+                        placeholder-text: "Input written folder.";
+                        text: operation.out;
+                        read-only: outfbutton.has-focus || loadbutton.has-focus;
+                        changed has-focus => {
+                              if !self.has-focus {
+                                    request-change-details({out: outfolderline.text, src: sourcefolderline.text, name: nameline.text})
+                              }
+                        }
+                  }
+                  KeyBinding {
+                        keys: @keys(Return);
+                        activated => {outfolderline.clear-focus(); request-change-details({out: outfolderline.text, src: sourcefolderline.text, name: nameline.text});}
+                  }
+              }
+          }
+      }
+  }
+}

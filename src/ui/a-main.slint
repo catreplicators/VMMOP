@@ -1,0 +1,90 @@
+import { Button, VerticalBox, HorizontalBox, ScrollView, ListView, LineEdit } from "std-widgets.slint";
+import {TopSection} from "top-section.slint";
+
+//import { PopupBasic } from "popup.slint";
+
+/*export component Representative inherits SystemTrayIcon {
+    tooltip: "Overwrite Automator";
+    title: "Vera's Overwrite Automator";
+
+}*/
+
+
+
+export component AppWindow inherits Window {
+    in-out property <{actions: [{change: int, file: string}], out: string, src: string, name: string}> operation <=> topsection.operation;
+
+    in property <[color]> change_colors;
+    in property <[string]> change_labels;
+
+    //property <bool> doing_anything;
+
+    callback request-open-operation-file <=> topsection.request-open-operation-file;
+    callback request-save-operation-file <=> topsection.request-save-operation-file;
+    callback request-operate <=> topsection.request-operate;
+    callback request-get-dir-source <=> topsection.request-get-dir-source;
+    callback request-get-dir-out <=> topsection.request-get-dir-out;
+    callback request-change-details <=> topsection.request-change-details;
+    //callback change_config();
+
+    title: "Vera's Overwrite Automator";
+    icon: @image-url("graphics/overwriter-logo.png");
+
+    VerticalBox {
+        
+        topsection := TopSection {}
+
+        Rectangle {
+            border-radius: 10px;
+            //background: @linear-gradient(165deg, #f6c645 0%, #75753a, #f69d3c 100%);
+            background: @linear-gradient(165deg, #5BCEFA, #FFFFFF33, #F5A9B8);
+            width: 100%;
+            Rectangle {
+                border-radius: 5px;
+                width: parent.width - 10px;
+                height: parent.height - 30px;
+                //background: #52522c;
+                background: #2C2C2CFF;
+                ListView {
+                    min-width: 400px;
+                    min-height: 100px;
+                    for mod[mod_i] in operation.actions : Rectangle {
+                        //background: @linear-gradient(180deg, hsv(0.0, 0.0, 0.2 + 0.035 * (Math.mod(mod_i, 5))), hsv(0.0, 0.0, 0.2 + 0.035 * (Math.mod(mod_i + 1, 5))));
+                        HorizontalBox {
+                            spacing: 5px;
+                            alignment: start;
+                            Rectangle {               
+                                height: 25px;
+                                width: 60px;
+                                background: change_colors[mod.change];
+                                Text {
+                                    text: change_labels[mod.change]; 
+                                    horizontal-alignment: center;
+                                    width: 100%;
+                                    color: #fffd89; 
+                                    overflow: elide;
+                                }
+                            }
+                            Rectangle{
+                                height: 25px;
+                                width: 100%;
+                                background: @linear-gradient(180deg, hsv(0.0, 0.0, 0.2 + 0.035 * (Math.mod(mod_i, 5))), hsv(0.0, 0.0, 0.2 + 0.035 * (Math.mod(mod_i + 1, 5))));
+                                Text {
+                                    text: mod.file;
+                                    horizontal-alignment: left;
+                                    x: 5px;
+                                    width: 100%;
+                                    color: #FFFFFF;
+                                    overflow: elide;
+                                }
+                            }
+                            preferred-height: 200px;
+                            preferred-width: 100%;
+                        }
+                    preferred-height: 25px;
+                    }
+                }
+            }
+        }
+    }
+}

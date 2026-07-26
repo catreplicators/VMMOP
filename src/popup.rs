@@ -57,9 +57,8 @@ pub fn basic_popup<Ta: ToString, Tb: ToString>(title: Ta, text: Tb) {
 
 }
 
-/* use slint;
+use slint;
 use slint::*;
-
 slint::slint!{
 	import { VerticalBox, HorizontalBox, Button } from "std-widgets.slint";
 	export component PopupBasic inherits Window {
@@ -102,16 +101,12 @@ slint::slint!{
 		}
 	}
 }
-
-pub async fn basic_popup2<Ta: ToString, Tb: ToString>(title: Ta, text:Tb) {
+pub fn basic_popup2<Ta: ToString, Tb: ToString>(title: Ta, text:Tb) {
 	if let Ok(ui) = PopupBasic::new() {
-		let handler = std::thread::spawn(move |ui| {
-			ui.set_mini(true);
-			ui.set_popup_title(SharedString::from(title.to_string()));
-			ui.set_popup_text(SharedString::from(text.to_string()));
-			ui.set_mini(false);
-			std::thread::sleep(std::time::Duration::new(25, 0));
-
-		});
+		ui.set_mini(true);
+		ui.set_popup_title(SharedString::from(title.to_string()));
+		ui.set_popup_text(SharedString::from(text.to_string()));
+		ui.set_mini(false);
+		std::thread::sleep(std::time::Duration::new(25, 0));
 	}
-} */
+}

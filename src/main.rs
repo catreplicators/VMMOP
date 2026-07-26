@@ -64,7 +64,7 @@ fn get_file_loc_sync(title: &str) -> Option<std::path::PathBuf> {
 }*/
 fn popup_mutex_failed<T: ToString>(extra: T) -> () {
     basic_popup(
-        "VMMOP unavailable: Other event in progress.".to_string(),
+        "Operation data unavailable: Other event in progress.".to_string(),
         "Additional information: \n".to_string() + &extra.to_string(),
     );
 }
@@ -77,63 +77,11 @@ fn main() -> Result<(), Error> {
         std::env::set_var("RUST_BACKTRACE", "1");
     }
 
-    /*let mut example_modifications: Vec::<(i32, SharedString)> = vec!(
-        (1, SharedString::from("FirstPersonModel.jar"       )),
-        (2, SharedString::from("HoldMyItems.jar"            )),
-        (0, SharedString::from("Lodestone.jar"              )),
-        (2, SharedString::from("Visuality.jar"              )),
-        (2, SharedString::from("Extra_Nonsense.jar"         )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-        (1, SharedString::from("Filler"                     )),
-    );*/
-    //ui.set_modifications(ModelRc::new(VecModel::from(example_modifications)));
-
     let mut operation = Operation {
-        name: None,
-        source: PathBuf::from_str("~/Downloads/").unwrap(),
-        out: PathBuf::from_str("~/Downloads/modsmodder-temp/").unwrap(),
-        actions: Operation::convert_actions_manual(vec![
-            (1, "FirstPersonModel.jar"),
-            (2, "HoldMyItems.jar"),
-            (0, "Lodestone.jar"),
-            (-1, "Wonderland.exe"),
-            (1, "Visuality.jar"),
-            (2, "Extra Nonsense.jar"),
-        ]),
+        name: Some("Load an operation from a file.".to_string()),
+        source: PathBuf::from_str("/").unwrap(),
+        out: PathBuf::from_str("/").unwrap(),
+        actions: Operation::convert_actions_manual(vec![]),
     };
     ui.set_operation(operation.slintify());
     ui.set_change_colors(ModelRc::new(VecModel::from(vec![
@@ -255,7 +203,7 @@ fn main() -> Result<(), Error> {
             let save_loc = match rfd::FileDialog::new()
                 .set_can_create_directories(true)
                 .set_title("Save the current operation to a file.")
-                .add_filter("Overwrite Automator Operation", &["vmmop", "vmmope"])
+                .add_filter("VMMOP Operation", &["vmmop", "vmmope"])
                 .set_file_name(calculate_hash(&**operation_h).to_string())
                 .save_file()
             {

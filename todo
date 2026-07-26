@@ -1,32 +1,35 @@
 
 --Functionality--
-[V] Actually do the operation.
-      [ ] Ask for confirmation for overwrite.
-[V] Return new path from text boxes.
-      [ ] Verify path.
-      [ ] Popup on invalid path.
+[_] Make relative paths work! Currently, the source and output directories must be absolute paths.
+
+[_] Verify source and output paths, with a popup if invalid.
 [V] Open operation file.
       [V] Verify integrity.
-[ ] Save operation file. 
-      [ ] Ask for confirmation for overwrite.
-[ ] Settings file saved in constant location.
-      [ ] Restore last operation.
-      [ ] Default opening folder: same as last time or particular folder? If latter fails, ascend path until valid?
-[ ] Some kind of wildcards.
-[ ] SteamCMD functionality, i.e. downloading specific items to the output folder.
+[_] Save operation file. 
+[_] Settings file saved in constant location.
+      [_] Restore last operation.
+      [_] Default opening folder: same as last time or particular folder? If latter fails, ascend path until valid?
+[_] Some kind of wildcards.
+      [_] At least "foldername/*" selecting everything in the folder. 
+[_] SteamCMD functionality, i.e. downloading specific items to the output folder.
+
+--Security--
+[_] Prevent ascension from output directory, or at least warn.
 
 --QOL--
-[ ] Settings menu?
-[ ] Customizable color palette.
-[ ] Hover tooltips.
-[I] User guide (external PDF).
-[ ] Modify operation directly in menu.
-[ ] Hot-reload operation from file.
+[_] Settings menu?
+[_] Customizable color palette.
+[_] Hover tooltips.
+[I] Reference (not within the program).
+[_] User guide (within the program).
+[_] Modify operation directly in menu.
+[_] Readme.md
+[_] Ask for confirmation for overwrite.
 
 --Bugs--
-[ ] Icon does not show up in bottom bar.
-[ ] Bottommost entry in the list is clipped / not given enough space.
+[_] Icon does not show up in bottom bar.
+[_] Bottommost entry in the list is clipped / not given enough space.
 
 --UI--
-[ ] United color pallete: split complementary, or analagous.
-[ ] Clip right bound of the filename section of each line 5px/10px before end
+[_] United color pallete: split complementary, or analagous.
+[_] Clip right bound of the filename section of each line 5px/10px before end

@@ -1,0 +1,11 @@
+A 1 on the left means "copy to output from source" while a 2 means "delete from output" . This operation will copy [file-A.png] to the output directory, overwriting any existing eponymous file there. It will additionally delete [file-B.png] from the output directory. Lines 2, 4, and 5 are completely skipped by the parser. They may be empty, or have text in them.
+
+C:\Users\me\path\to\source\directory | C:\Users\me\path\to\output\directory
+
+
+1 | file-A.png
+2 | file-B.png
+
+This line will fail to parse, and therefore be set as an error, with a modification type of 0. So will the line immediately previous. For a line after line 5 to be parsed and considered valid, it must fit the format on the next line.
+Mod Type ID | Relative/path/to/the/file
+The "Mod Type ID" must be a valid unsigned 8-bit integer. The vertical bar must have a space on both sides. The relative path is not actually checked for validity, but non-wacky paths *should* work.

@@ -1,6 +1,6 @@
-/target
-/src/guide
-/testing/ou
+/target/
+/src/guide/
+/testing/ou/
 /testing/testing - Shortcut.lnk
 /~
 cargo.lock
